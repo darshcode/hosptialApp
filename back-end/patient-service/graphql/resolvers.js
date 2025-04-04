@@ -1,4 +1,5 @@
 import Patient from "../models/Patient.js";
+import MotivationCard from "../models/MotivationCard.js";
 
 const resolvers = {
   Query: {
@@ -30,6 +31,24 @@ const resolvers = {
         throw new Error("Error finding patient: " + error.message);
       }
     },
+
+    getMotivationCard: async () => {
+      try {
+        const latestCard = await MotivationCard.findOne().sort({ _id: -1 });
+        if (!latestCard) return null;
+
+        return {
+          id: latestCard._id.toString(),
+          topic: latestCard.Topic,
+          message: latestCard.message,
+        };
+      } catch (error) {
+        throw new Error(
+          "Failed to fetch latest motivation card: " + error.message
+        );
+      }
+    },
+
     symptoms: async (_, { id }) => {
       try {
         const patient = await Patient.findById(id);
@@ -88,6 +107,23 @@ const resolvers = {
         };
       } catch (error) {
         throw new Error("Login failed: " + error.message);
+      }
+    },
+
+    createMotivationCard: async (_, { topic, message }) => {
+      try {
+        const newCard = new MotivationCard({
+          Topic: topic,
+          message,
+        });
+        const savedCard = await newCard.save();
+        return {
+          id: savedCard._id.toString(),
+          topic: savedCard.Topic,
+          message: savedCard.message,
+        };
+      } catch (error) {
+        throw new Error("Failed to create motivation card: " + error.message);
       }
     },
 
@@ -162,6 +198,7 @@ const resolvers = {
         throw new Error("Server - Error updating patient: " + error.message);
       }
     },
+
     addVisit: async (_, { id, visit }) => {
       try {
         const patient = await Patient.findById(id);

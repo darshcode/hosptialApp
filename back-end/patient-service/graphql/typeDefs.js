@@ -68,7 +68,11 @@ const typeDefs = `#graphql
     followUpDate: String
   }
 
-  
+  type MotivationCard {
+  id: ID!
+  topic : String!
+  message : String!
+  }
 
   input ContactInfoInput {
     phone: String!
@@ -107,12 +111,14 @@ const typeDefs = `#graphql
   followUpDate: String
 }
 
+#Note, motivatin returns a single and latest card.
   type Query {
     patients: [Patient!]!
     patient(id: ID!): Patient
     contactDetails(id: ID!): ContactDetails
     symptoms(id: ID!): [String]
     healthDetails(id: ID!): HealthDetails
+    getMotivationCard: MotivationCard! 
   }
 
   type Mutation {
@@ -142,6 +148,8 @@ const typeDefs = `#graphql
       physicalData: PhysicalDataInput
       visits: [VisitInput]
     ): Patient!
+
+    createMotivationCard(topic: String!, message: String!): MotivationCard!
 
     deletePatient(id: ID!): String!
 
