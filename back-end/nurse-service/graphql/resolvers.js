@@ -1,4 +1,5 @@
 import MotivationCard from "../models/MotivationCard.js";
+import HelpAlert from "../models/HelpAlert.js";
 
 const resolvers = {
   Query: {
@@ -23,7 +24,12 @@ const resolvers = {
         message: latest.message,
       };
     },
+
+    getAllHelpAlerts: async () => {
+      return await HelpAlert.find().sort({ createdAt: -1 });
+    },
   },
+
   Mutation: {
     createMotivationCard: async (_, { topic, message }) => {
       try {
@@ -45,6 +51,11 @@ const resolvers = {
       } catch (error) {
         throw new Error("Failed to delete card: " + error.message);
       }
+    },
+
+    markAlertViewed: async (_, { id }) => {
+      const updated = await HelpAlert.findByIdAndUpdate(id, { viewed: true });
+      return !!updated;
     },
   },
 };

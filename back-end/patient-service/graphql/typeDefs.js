@@ -74,6 +74,15 @@ const typeDefs = `#graphql
   message : String!
   }
 
+  type HelpAlert {
+  id: ID!
+  patientId: ID!
+  message: String
+  viewed: Boolean!
+  createdAt: String!
+}
+
+
   input ContactInfoInput {
     phone: String!
     email: String
@@ -158,6 +167,8 @@ const typeDefs = `#graphql
     addSymptoms(id: ID!, symptoms: [String]!): Patient!
 
     removeSymptom(id: ID!, symptom: String!): Patient!
+
+    sendHelpAlert(patientId: ID!, message: String): HelpAlert!
   }
 `;
 

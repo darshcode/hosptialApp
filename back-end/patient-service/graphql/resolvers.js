@@ -1,5 +1,6 @@
 import Patient from "../models/Patient.js";
 import MotivationCard from "../models/MotivationCard.js";
+import HelpAlert from "../models/HelpAlert.js";
 
 const resolvers = {
   Query: {
@@ -259,6 +260,11 @@ const resolvers = {
       } catch (error) {
         throw new Error("Error removing symptom: " + error.message);
       }
+    },
+
+    sendHelpAlert: async (_, { patientId, message }) => {
+      const newAlert = new HelpAlert({ patientId, message });
+      return await newAlert.save();
     },
   },
 };

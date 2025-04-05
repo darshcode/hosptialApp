@@ -6,6 +6,7 @@ import UpdateEmergencyContact from "./UpdateEmergencyContact";
 import UpdateMedicalHistory from "./UpdateMedicalHistory";
 import UpdatePhysicalData from "./UpdatePhysicalData";
 import MotivationCard from "./MotivationCard";
+import SendHelpAlert from "./SendHelpAlert";
 
 const GET_PATIENT = gql`
   query GetPatient($id: ID!) {
@@ -68,7 +69,7 @@ export default function PatientDashboard() {
   return (
     <div className="container mt-4">
       <h2>Welcome, {formData.fullName}</h2>
-
+      <SendHelpAlert />
       <MotivationCard />
 
       <nav className="nav nav-pills mb-4">
