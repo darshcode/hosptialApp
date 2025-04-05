@@ -2,8 +2,8 @@ import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 import express from "express";
 import mongoose from "mongoose";
-import typeDefs from "./graphql/typeDefs.js"; // Assuming your type definitions are in typeDefs.js
-import resolvers from "./graphql/resolvers.js"; // Assuming your resolvers are in resolvers.js
+import typeDefs from "./graphql/typeDefs.js";
+import resolvers from "./graphql/resolvers.js";
 import dotenv from "dotenv";
 
 const app = express();
