@@ -35,7 +35,7 @@ const typeDefs = `#graphql
   type ContactDetails {
   contactInfo: ContactInfo
   emergencyContact: EmergencyContact
-}
+  }
 
   type MedicalHistory {
     allergies: [String]
@@ -82,7 +82,6 @@ const typeDefs = `#graphql
   createdAt: String!
 }
 
-
   input ContactInfoInput {
     phone: String!
     email: String
@@ -128,6 +127,7 @@ const typeDefs = `#graphql
     symptoms(id: ID!): [String]
     healthDetails(id: ID!): HealthDetails
     getMotivationCard: MotivationCard! 
+    
   }
 
   type Mutation {
